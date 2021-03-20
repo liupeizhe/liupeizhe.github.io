@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="kmfc"><title>git修改已提交的commit注释 · 枯木逢春_blog</title><meta name="description" content="修改注释分为两种情况：
+
+代码未push到远程仓库， 还在本地仓库中。
+已经将代码push到远程仓库了。
+
+第一种情况比第二种情况要多操作一步。
+代码未push到远程仓库修改最后一次注释在项目路径下打开终端，输入：git commit --amend
+回车，出现界面如下，第一行是你的注释，输入i，进"><meta name="keywords" content="枯木逢春"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo.jpg" style="width:127px;"><h3 title=""><a href="/">kmfc</a></h3><div class="description"><p>心之所愿，无事不成。<br> Nothing is impossible to a willing heart.</p></div></div></div><ul class="social-links"><li><a title="https://github.com/liupeizhe" href="https://github.com/liupeizhe" target="_blank" rel="noopener"><i class="fa fa-github"></i></a></li><li><a title="2634844296@qq.com" href="https://mail.qq.com/" target="_blank" rel="noopener"><i class="fa fa-envelope"></i></a></li><li><a title="2634844296" href="https://im.qq.com/" target="_blank" rel="noopener"><i class="fa fa-qq"></i></a></li><li><a title="https://www.zhihu.com/people/ai-xue-xi-de-a-zhe" href="https://www.zhihu.com/people/ai-xue-xi-de-a-zhe" target="_blank" rel="noopener"><i class="fa fa-mortar-board"></i></a></li></ul><div class="footer"><div class="p"> <span>© 2019 - 2021 </span><i class="fa fa-star"></i><span> kmfc</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core.  </a><a href="http://www.beian.miit.gov.cn/" target="_blank">&nbsp;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="/tags">标签</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>git修改已提交的commit注释</a></h3></div><div class="post-content"><p>修改注释分为两种情况：</p>
+<ol>
+<li>代码未push到远程仓库， 还在本地仓库中。</li>
+<li>已经将代码push到远程仓库了。</li>
+</ol>
+<p>第一种情况比第二种情况要多操作一步。</p>
+<h1 id="代码未push到远程仓库"><a href="#代码未push到远程仓库" class="headerlink" title="代码未push到远程仓库"></a>代码未push到远程仓库</h1><h2 id="修改最后一次注释"><a href="#修改最后一次注释" class="headerlink" title="修改最后一次注释"></a>修改最后一次注释</h2><p>在项目路径下打开终端，输入：<br><code>git commit --amend</code></p>
+<p>回车，出现界面如下，第一行是你的注释，输入<code>i</code>，进入编辑模式，将注释改好后按<code>Esc</code>退出编辑模式，输入<code>:wq</code>保存并退出，这时候你的注释就已经改好了。</p>
+<p><img src="/images/git-update-commit/01.png" alt="修改最后一次注释"></p>
+<h2 id="修改之前的注释"><a href="#修改之前的注释" class="headerlink" title="修改之前的注释"></a>修改之前的注释</h2><ol>
+<li><p>输入：<br><code>git rebase -i HEAD~2</code></p>
+<p>最后的数字2指的是显示到倒数第几次， 比如2就会代表显示倒数的两次注释。<br>如图：</p>
+</li>
+</ol>
+<p><img src="/images/git-update-commit/02.png" alt="修改之前的注释"></p>
+<ol start="2">
+<li><p>你想修改哪条注释，就把哪条注释前面的<code>pick</code>换成<code>edit</code>，注意不要动注释内容，只要改前面的东西就好了。<br><code>i</code>进入编辑模式，把<code>pick</code>换成<code>edit</code>后，<code>Esc</code>退出编辑模式，<code>:wq</code>保存并退出。</p>
+</li>
+<li><p>接下来输入：<br><code>git commit --amend</code></p>
+<p>修改好注释内容后，输入：<br><code>git rebase --continue</code></p>
+</li>
+<li><p>修改结束。</p>
+</li>
+</ol>
+<h2 id="修改之前某几次注释"><a href="#修改之前某几次注释" class="headerlink" title="修改之前某几次注释"></a>修改之前某几次注释</h2><p>第一步操作同上，第二步，你可以将多个想修改的commit注释前面的<code>pick</code>都换成<code>edit</code>。</p>
+<p>接下来依次修改你的注释（顺序是从旧到新），Terminal基本都会提示你接下来的操作，每修改一个注释都要重复上面的3和4步，直到修改完你所选择的所有注释。</p>
+<h1 id="代码已经push到远程仓库"><a href="#代码已经push到远程仓库" class="headerlink" title="代码已经push到远程仓库"></a>代码已经push到远程仓库</h1><p>首先，<code>git pull</code>保证本地代码最新，修改的方法都如上，最后修改完成后，强制push到远程仓库：<br><code>git push --force origin master</code></p>
+<p><strong>注：要保证在你强制push之前没有人提交代码，如果在你push之前有人提交了新的代码到远程仓库，然后你又强制push，那么会被你的强制更新覆盖！</strong></p>
+<p>最后记得检查一下远程提交记录~</p>
+<p>gitmoji：<a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">https://gitmoji.carloscuesta.me/</a></p>
+<p>— END —</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-02-10</span><i class="fa fa-tag"></i><a class="tag" href="/tags/git/" title="git">git </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/2020/02/10/git-update-commit/,枯木逢春_blog,git修改已提交的commit注释,;" target="_blank" rel="noopener"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2020/04/13/ionic-photo/" title="ionic 相机拍照上传与相册上传">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2020/01/24/elementui-elUpload-removeImgByIndex/" title="el-upload通过下标删除图片">下一篇</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
